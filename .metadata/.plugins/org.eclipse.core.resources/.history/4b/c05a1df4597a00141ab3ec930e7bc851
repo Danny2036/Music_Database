@@ -1,0 +1,6 @@
+import java.io.PrintWriter;
+
+
+public class TextEdit {
+	PrintWriter out = new PrintWriter("filename.txt");
+}

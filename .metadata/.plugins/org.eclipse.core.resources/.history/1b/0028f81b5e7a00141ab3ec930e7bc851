@@ -1,0 +1,66 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+
+public class TextEdit {
+	PrintWriter writer = new PrintWriter("Easy to Read Database");
+	public static void main(String args[]){
+		System.out.println("main");
+
+		try {
+			TextEdit.reformat("Database.txt");
+		} catch (IOException e) {
+			System.out.println("File not found");
+		}
+	}
+
+
+	public void reformat(String inputFileName, String outputFileName) throws IOException{
+		BufferedReader reader;
+		PrintWriter writer;
+		String[] arr;
+		String currentLine;
+		try {
+			reader = new BufferedReader(new FileReader(inputFileName));
+			writer = new PrintWriter(outputFileName);
+			
+			currentLine = reader.readLine();
+			while(null != currentLine){
+				writer.print(arr[i]);
+				arr = currentLine.split(" INSERT");
+				for(int i = 1; i < arr.length; i++){
+					writer.println("INSERT " + arr[i] + "\n");
+				}
+			}
+			while (currentLine != null) {
+				char[] charArray = currentLine.toCharArray();
+				for(int i = 0; i < charArray.length; i++){
+					codeLine+= newMap.get(charArray[i]);
+				}
+				writer.println(codeLine);
+				newLength+= codeLine.length();
+				codeLine = "";
+				currentLine = reader.readLine();
+			}
+			//TextEditprintCode( ,writer);
+			
+			reader.close();
+			writer.close();
+			System.out.println("Finished");
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}
+	}
+	
+	public static void printCode(String[] arr, PrintWriter writer){
+		for (int i = 0; i < arr.length; i++){
+			writer.println("INSERT" + arr[i]+ "\n");
+		}  
+
+	}
+}

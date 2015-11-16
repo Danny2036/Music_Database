@@ -1,0 +1,43 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+
+public class TextEdit {
+	
+	public static void main(String args[]){
+		System.out.println("main");
+
+		try {
+			TextEdit.reformat("Database.txt");
+		} catch (IOException e) {
+			System.out.println("File not found");
+		}
+	}
+	
+
+	public static void reformat(String filename) throws IOException{
+		System.out.println("To List");
+
+		BufferedReader reader = new BufferedReader(new FileReader(filename));
+		String currentLine = reader.readLine();
+		String[] array;
+
+		while(currentLine != null){
+			String line = currentLine.toLowerCase();
+			array = line.split("\\W");
+
+			for(int i = 0; i<array.length; i++){
+				System.out.println(array[i]);
+			}
+			for(int i = 0; i< array.length; i++){
+				if(array[i]!= null){
+					//this.insert(array[i]);
+				}
+			}
+			currentLine = reader.readLine();
+		}
+		reader.close();
+	}
+}

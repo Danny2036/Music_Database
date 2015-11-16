@@ -1,0 +1,49 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+
+public class TextEdit {
+	PrintWriter writer = new PrintWriter("Easy to Read Database");
+	public static void main(String args[]){
+		System.out.println("main");
+
+		try {
+			TextEdit.reformat("Database.txt");
+		} catch (IOException e) {
+			System.out.println("File not found");
+		}
+	}
+
+
+	public void reformat(String inputFileName, outputFileName) throws IOException{
+		BufferedReader reader;
+		PrintWriter writer;
+		try {
+			reader = new BufferedReader(new FileReader(inputFileName));
+			writer = new PrintWriter(outputFileName);
+			e.printCode(newMap,writer);
+			currentLine = reader.readLine();
+			while (currentLine != null) {
+				char[] charArray = currentLine.toCharArray();
+				for(int i = 0; i < charArray.length; i++){
+					codeLine+= newMap.get(charArray[i]);
+				}
+				writer.println(codeLine);
+				newLength+= codeLine.length();
+				codeLine = "";
+				currentLine = reader.readLine();
+			}
+			writer.println("You have saved " + (newLength*2-orgLength*2^8)+ " bits of data.");
+
+			reader.close();
+			writer.close();
+			System.out.println("Finished");
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}
+	}
+}

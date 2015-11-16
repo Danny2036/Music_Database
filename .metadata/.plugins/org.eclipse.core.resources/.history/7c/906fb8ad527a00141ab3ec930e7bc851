@@ -1,0 +1,150 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JMenu;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JRadioButton;
+
+
+public class Interface {
+
+	private JFrame frame;
+	private JTextField textField;
+	private JTable table;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTable table_1;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Interface window = new Interface();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public Interface() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 518, 422);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		textField = new JTextField();
+		textField.setBounds(32, 57, 86, 20);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Artist Name");
+		lblNewLabel.setBounds(32, 32, 86, 14);
+		frame.getContentPane().add(lblNewLabel);
+		
+		table = new JTable();
+		table.setBounds(255, 37, 193, 130);
+		frame.getContentPane().add(table);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(32, 108, 86, 20);
+		frame.getContentPane().add(textField_1);
+		
+		JLabel lblAlbumName = new JLabel("Album Name");
+		lblAlbumName.setBounds(32, 83, 86, 14);
+		frame.getContentPane().add(lblAlbumName);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(32, 169, 86, 20);
+		frame.getContentPane().add(textField_2);
+		
+		JLabel lblSongName = new JLabel("Song Name");
+		lblSongName.setBounds(32, 149, 86, 14);
+		frame.getContentPane().add(lblSongName);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(32, 222, 86, 20);
+		frame.getContentPane().add(textField_3);
+		
+		JLabel lblDurations = new JLabel("Durations");
+		lblDurations.setBounds(32, 202, 86, 14);
+		frame.getContentPane().add(lblDurations);
+		
+		table_1 = new JTable();
+		table_1.setBounds(255, 202, 193, 130);
+		frame.getContentPane().add(table_1);
+		
+		JLabel lblAlbums = new JLabel("Albums");
+		lblAlbums.setBounds(255, 11, 193, 14);
+		frame.getContentPane().add(lblAlbums);
+		
+		JLabel lblSong = new JLabel("Song");
+		lblSong.setBounds(255, 178, 193, 14);
+		frame.getContentPane().add(lblSong);
+		
+		JButton btnSearch = new JButton("Search");
+		btnSearch.setBounds(32, 309, 89, 23);
+		frame.getContentPane().add(btnSearch);
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("");
+		rdbtnNewRadioButton.setBounds(9, 56, 109, 23);
+		frame.getContentPane().add(rdbtnNewRadioButton);
+		
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("");
+		rdbtnNewRadioButton_1.setBounds(9, 108, 109, 23);
+		frame.getContentPane().add(rdbtnNewRadioButton_1);
+		
+		JRadioButton radioButton = new JRadioButton("");
+		radioButton.setBounds(9, 168, 109, 23);
+		frame.getContentPane().add(radioButton);
+		
+		JRadioButton radioButton_1 = new JRadioButton("");
+		radioButton_1.setBounds(9, 221, 109, 23);
+		frame.getContentPane().add(radioButton_1);
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
+}

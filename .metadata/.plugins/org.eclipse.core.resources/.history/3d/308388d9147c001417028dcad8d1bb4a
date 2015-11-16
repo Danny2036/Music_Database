@@ -1,0 +1,295 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JMenu;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JRadioButton;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollBar;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+
+public class Interface {
+
+	private JFrame frame;
+	
+	private JTextField artistTxt;
+	private JTextField albumTxt;
+	private JTextField songTxt;
+	private JTextField yearTxt;
+	
+	private JTable albumTable;
+	
+	private JTable songTable;
+	private JTable artistTable;
+	
+	JLabel artistLbl;
+	JLabel albumLbl;
+	JLabel songLbl;
+	JLabel yearLbl;
+	
+	JRadioButton artistBtn;
+	JRadioButton albumBtn; 
+	JRadioButton songBtn;
+	JRadioButton yearBtn; 
+	
+	JLabel artistTableLbl;
+	JLabel albumTableLbl;
+	JLabel songTableLbl;
+	JLabel yearTableLbl;
+	
+	JButton searchBtn;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Interface window = new Interface();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public Interface() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 656, 374);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		artistTxt = new JTextField();
+		artistTxt.setBounds(32, 57, 140, 20);
+		frame.getContentPane().add(artistTxt);
+		artistTxt.setColumns(10);
+		
+		artistLbl = new JLabel("Artist Name");
+		artistLbl.setBounds(32, 32, 86, 14);
+		frame.getContentPane().add(artistLbl);
+		
+		albumTable = new JTable(5,5);
+		albumTable.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"Id", "Name", "Artist", "Year", "# of Tracks"},
+			},
+			new String[] {
+				"New column", "New column", "New column", "New column", "A"
+			}
+		));
+		albumTable.setBounds(194, 172, 400, 64);
+		frame.getContentPane().add(albumTable);
+		
+		albumTxt = new JTextField();
+		albumTxt.setColumns(10);
+		albumTxt.setBounds(32, 108, 140, 20);
+		frame.getContentPane().add(albumTxt);
+		
+		albumLbl = new JLabel("Album Name");
+		albumLbl.setBounds(32, 83, 86, 14);
+		frame.getContentPane().add(albumLbl);
+		
+		songTxt = new JTextField();
+		songTxt.setColumns(10);
+		songTxt.setBounds(32, 169, 140, 20);
+		frame.getContentPane().add(songTxt);
+		
+		songLbl = new JLabel("Song Name");
+		songLbl.setBounds(32, 149, 86, 14);
+		frame.getContentPane().add(songLbl);
+		
+		yearTxt = new JTextField();
+		yearTxt.setColumns(10);
+		yearTxt.setBounds(32, 222, 140, 20);
+		frame.getContentPane().add(yearTxt);
+		
+		yearLbl = new JLabel("Year");
+		yearLbl.setBounds(32, 202, 86, 14);
+		frame.getContentPane().add(yearLbl);
+		
+		songTable = new JTable();
+		songTable.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"Id", "Name", "Artist", "Album Id"},
+			},
+			new String[] {
+				"New column", "New column", "New column", "New column"
+			}
+		));
+		songTable.setBounds(194, 277, 400, 48);
+		frame.getContentPane().add(songTable);
+		
+		albumTableLbl = new JLabel("Albums");
+		albumTableLbl.setBounds(327, 147, 193, 14);
+		frame.getContentPane().add(albumTableLbl);
+		
+		JLabel songTableLbl = new JLabel("Song");
+		songTableLbl.setBounds(334, 252, 193, 14);
+		frame.getContentPane().add(songTableLbl);
+		
+		searchBtn = new JButton("Search");
+		searchBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String artistInfo = artistTxt.getText();
+				String albumInfo = albumTxt.getText();
+				String songInfo = songTxt.getText();
+				String yearInfo = yearTxt.getText();
+				
+				String[][] artistTableData = {null,null,null};//getArtistResults();
+				String[][] albumTableData = {null,null,null};//getalbumResults();
+				String[][] songTableData = {null,null,null};//getSongResults();
+				
+				for(int i = 1; i < 3; i++){
+					((DefaultTableModel)artistTable.getModel()).addRow(artistTableData[i]);
+				}
+				/*
+				for(int i = 1; i < 4; i++){
+					((DefaultTableModel)albumTable.getModel()).addRow(artistTableData[i]);
+					
+					albumTable.addRowSelectionInterval(albumTable.getRowCount(), albumTable.getRowCount());
+					albumTable.getModel().setValueAt(albumTableData[i][0], 0, albumTable.getRowCount() - 1);
+					albumTable.getModel().setValueAt(albumTableData[i][1], 1, albumTable.getRowCount() - 1);
+					albumTable.getModel().setValueAt(albumTableData[i][2], 2, albumTable.getRowCount() - 1);
+					albumTable.getModel().setValueAt(albumTableData[i][3], 3, albumTable.getRowCount() - 1);
+					albumTable.getModel().setValueAt(albumTableData[i][3], 4, albumTable.getRowCount() - 1);
+				
+				}
+					
+				for(int i = 1; i < 4; i++){
+					((DefaultTableModel)songTable.getModel()).addRow(songTableData[i]);
+					/*
+					songTable.addRowSelectionInterval(songTable.getRowCount(), songTable.getRowCount());
+					songTable.getModel().setValueAt(songTableData[i][0], 0, songTable.getRowCount() - 1);
+					songTable.getModel().setValueAt(songTableData[i][1], 1, songTable.getRowCount() - 1);
+					songTable.getModel().setValueAt(songTableData[i][2], 2, songTable.getRowCount() - 1);
+					songTable.getModel().setValueAt(songTableData[i][3], 3, songTable.getRowCount() - 1);
+				
+				}
+				*/
+			}
+		});
+		searchBtn.setBounds(63, 289, 89, 23);
+		frame.getContentPane().add(searchBtn);
+		
+		artistBtn = new JRadioButton("");
+		artistBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(artistBtn.isSelected()){
+					artistTxt.setEnabled(true);
+				} else {
+					artistTxt.setEnabled(false);
+				}
+			}
+		});
+		artistBtn.setBounds(9, 56, 109, 23);
+		frame.getContentPane().add(artistBtn);
+		
+		albumBtn = new JRadioButton("");
+		albumBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(albumBtn.isSelected()){
+					albumTxt.setEnabled(true);
+				} else {
+					albumTxt.setEnabled(false);
+				}
+			}
+		});
+		albumBtn.setBounds(9, 108, 109, 23);
+		frame.getContentPane().add(albumBtn);
+		
+		songBtn = new JRadioButton("");
+		songBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(songBtn.isSelected()){
+					songTxt.setEnabled(true);
+				} else {
+					songTxt.setEnabled(false);
+				}
+			}
+		});
+		songBtn.setBounds(9, 168, 109, 23);
+		frame.getContentPane().add(songBtn);
+		
+		yearBtn = new JRadioButton("");
+		yearBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(yearBtn.isSelected()){
+					yearTxt.setEnabled(true);
+				} else {
+					yearTxt.setEnabled(false);
+				}
+			}
+		});
+		yearBtn.setBounds(9, 221, 109, 23);
+		frame.getContentPane().add(yearBtn);
+		
+		artistTable = new JTable(5, 5);
+		artistTable.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"Id", "Name", "# of Album", "# of Tracks"},
+			},
+			new String[] {
+				"A", "B", "C", "D"
+			}
+		));
+		artistTable.setBounds(194, 60, 400, 64);
+		frame.getContentPane().add(artistTable);
+		
+		artistTableLbl = new JLabel("Artist");
+		artistTableLbl.setBounds(327, 32, 193, 14);
+		frame.getContentPane().add(artistTableLbl);
+		
+		JScrollBar scrollBar = new JScrollBar();
+		scrollBar.setBounds(594, 57, 17, 71);
+		frame.getContentPane().add(scrollBar);
+		
+		JScrollBar scrollBar_1 = new JScrollBar();
+		scrollBar_1.setBounds(594, 165, 17, 71);
+		frame.getContentPane().add(scrollBar_1);
+		
+		JScrollBar scrollBar_2 = new JScrollBar();
+		scrollBar_2.setBounds(594, 277, 17, 48);
+		frame.getContentPane().add(scrollBar_2);
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
+}
